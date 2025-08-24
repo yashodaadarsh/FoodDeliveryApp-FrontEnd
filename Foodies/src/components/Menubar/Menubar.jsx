@@ -1,14 +1,18 @@
 import React, { useContext, useState } from 'react'
 import './Menubar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/StoreContext'
+import Login from '../Login/Login'
+import Register from '../Register/Register'
 
 const Menubar = () => {
   const [active,setActive] = useState("home");
   const {quantities} = useContext(StoreContext);
   const uniqueItemsInCart = Object.values(quantities).filter(qty => qty > 0 ).length;
-  
+  const navigate = useNavigate();
+
+
   return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -30,8 +34,8 @@ const Menubar = () => {
           </ul>
 
           <div className="d-flex align-items-center gap-4">
-            <button className="btn btn-outline-primary">Login</button>
-            <button className="btn btn-outline-success">Register</button>
+            <button className="btn btn-outline-primary" onClick={ () => navigate('/login') } >Login</button>
+            <button className="btn btn-outline-success" onClick={ () => navigate('/register') } >Register</button>
             <Link to={`/cart`}>
               <div className="position-relative">
                 <img src={assets.cart} alt="" className='position-relative ' height={60} width={60} />

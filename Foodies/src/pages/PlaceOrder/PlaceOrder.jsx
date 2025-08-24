@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
+import { calculateCartTotals } from "../../util/cartUtils";
 
 const PlaceOrder = () => {
   const { foodList, quantities, setQuantities } = useContext(StoreContext);
@@ -8,13 +9,7 @@ const PlaceOrder = () => {
   const cartItems = foodList.filter((food) => quantities[food.id] > 0);
 
   // Calculating total
-  const subtotal = cartItems.reduce(
-    (acc, food) => acc + food.price * quantities[food.id],
-    0
-  );
-  const shipping = subtotal === 0 ? 0.0 : 10;
-  const tax = subtotal * 0.1; // 10%
-  const total = subtotal + shipping + tax;
+  const {subtotal,shipping,tax,total} = calculateCartTotals(cartItems,quantities);
 
   return (
     <div className="container py-5">

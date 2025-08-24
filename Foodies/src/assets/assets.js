@@ -8,10 +8,12 @@ import salad from './salad.png';
 import cake from './cake.png';
 import iceCream from './icecream.png';
 import rolls from './rolls.png';
+import profile from './profile.png'
 
 export const assets = {
     logo,
-    cart
+    cart,
+    profile
 };
 
 export const categories = [
